@@ -1,0 +1,7 @@
+{
+  "name": "fingerprintAttendance",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
