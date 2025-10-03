@@ -1,0 +1,16 @@
+# Gradle
+.gradle/
+build/
+
+# Android Studio
+.idea/
+*.iml
+
+# Gradle Wrapper
+gradle/wrapper/gradle-wrapper.properties
+
+# Local config
+local.properties
+
+# Other
+*.log
