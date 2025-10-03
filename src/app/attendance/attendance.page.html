@@ -1,0 +1,55 @@
+<div style="background: red; color: white; padding: 20px; font-size: 20px;">
+    APP IS LOADING - TEST MESSAGE
+</div>
+
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Fingerprint Attendance</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="status" [class.ready]="isDeviceReady">
+        <ion-icon [name]="isDeviceReady ? 'checkmark-circle' : 'close-circle'"></ion-icon>
+        <span>{{ isDeviceReady ? 'Scanner Ready' : 'Scanner Not Ready' }}</span>
+    </div>
+
+    <div class="actions">
+        <ion-button expand="block" (click)="markAttendance()" [disabled]="!isDeviceReady">
+            <ion-icon name="fingerprint" slot="start"></ion-icon>
+            Mark Attendance
+        </ion-button>
+
+        <ion-button expand="block" fill="outline" (click)="enrollUser()" [disabled]="!isDeviceReady">
+            <ion-icon name="person-add" slot="start"></ion-icon>
+            Enroll User
+        </ion-button>
+    </div>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Today's Attendance ({{ attendanceRecords.length }})</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item *ngFor="let record of attendanceRecords.slice(0, 5)">
+                <ion-label>
+                    <h3>{{ getUserName(record.userId) }}</h3>
+                    <p>{{ record.timestamp | date:'short' }}</p>
+                </ion-label>
+            </ion-item>
+            <p *ngIf="attendanceRecords.length === 0">No records today</p>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Enrolled Users ({{ enrolledUsers.length }})</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item *ngFor="let user of enrolledUsers">
+                <ion-label>{{ user.name }}</ion-label>
+            </ion-item>
+            <p *ngIf="enrolledUsers.length === 0">No users enrolled</p>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
